@@ -12,7 +12,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = "llama-3.3-70b-versatile";
+const MODEL = "openai/gpt-oss-120b";
 
 /**
  * System prompt — turns the model into a strict IELTS Speaking examiner.
@@ -83,9 +83,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // ── Call the Groq API ───────────────────────────────────────────
+        // ── Call the Groq API ───────────────────────────────────────────
     const controller = new AbortController();
     timeoutId = setTimeout(() => controller.abort(), 25000);
+
+    const requestBody = {
+      model: MODEL,
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        {
+          role: "user",
+          content: JSON.stringify({ topic, transcript }),
+        },
+      ],
+      temperature: 0.3,
+      response_format: { type: "json_object" },
+    };
+
+    console.log("[api/feedback] Calling Groq API with model:", MODEL);
 
     const groqResponse = await fetch(GROQ_API_URL, {
       method: "POST",
@@ -93,31 +108,34 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${GROQ_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          {
-            role: "user",
-            content: JSON.stringify({ topic, transcript }),
-          },
-        ],
-        temperature: 0.3,
-        response_format: { type: "json_object" },
-      }),
+      body: JSON.stringify(requestBody),
       signal: controller.signal,
     });
 
     clearTimeout(timeoutId);
 
+    console.log("[api/feedback] Groq API response status:", groqResponse.status);
+
     // ── Handle Groq API errors ──────────────────────────────────────
     if (!groqResponse.ok) {
-      const groqError = await groqResponse.json().catch(() => ({}));
+      const errorText = await groqResponse.text();
+      console.error("[api/feedback] Groq API error:", {
+        status: groqResponse.status,
+        statusText: groqResponse.statusText,
+        body: errorText,
+      });
+      let groqError: any = {};
+      try {
+        groqError = JSON.parse(errorText);
+      } catch {
+        groqError = { raw: errorText };
+      }
       return NextResponse.json(
         {
           error:
             groqError?.error?.message ||
-            `Groq API returned ${groqResponse.status}`,
+            groqError?.message ||
+            `Groq API returned ${groqResponse.status}: ${groqResponse.statusText}`,
         },
         { status: 502 }
       );
@@ -179,13 +197,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log full error details for debugging
+        // Log full error details for debugging
     console.error("[api/feedback] Unexpected error:", {
       message: error?.message,
       code: error?.code,
       stack: error?.stack,
       cause: error?.cause,
     });
+
+    // Handle network errors (DNS, connection refused, etc.)
+    if (error?.code === "ENOTFOUND" || error?.code === "ECONNREFUSED" || error?.code === "UND_ERR_SOCKET") {
+      return NextResponse.json(
+        { error: "Could not connect to the AI service. Please check your internet connection." },
+        { status: 503 }
+      );
+    }
 
     return NextResponse.json(
       { error: "Internal server error." },

@@ -12,7 +12,7 @@ IELTS 9-band scale.
 - **8 realistic IELTS Speaking Part 2 cue cards** — plus a custom topic input
 - **Live transcription** via the browser's built-in Web Speech API (free, no API key)
 - **2-minute timer** mimicking the real IELTS Part 2 time limit
-- **AI-powered feedback** via Groq Llama 3.3 70B, scored on the IELTS 9-band scale
+- **AI-powered feedback** via Groq GPT-OSS 120B, scored on the IELTS 9-band scale
 - **Structured results** with band scores, strengths, weaknesses, missing points, and one actionable tip
 - **Fully responsive** — works on mobile, tablet, and desktop
 - **Clean, minimal design** — plenty of whitespace, professional look
@@ -25,7 +25,7 @@ IELTS 9-band scale.
 | Language        | TypeScript                              |
 | Styling         | Tailwind CSS                            |
 | Speech-to-Text  | Web Speech API (`webkitSpeechRecognition`) |
-| AI Feedback     | Groq API (`llama-3.3-70b-versatile`)    |
+| AI Feedback     | Groq API (`openai/gpt-oss-120b`)        |
 | Deployment      | Vercel (recommended)                    |
 | State Mgmt      | React Context (client-side only)        |
 
@@ -77,7 +77,7 @@ The app displays a clear warning if the browser is not supported.
 
 | Variable        | Description                                    | Required |
 | --------------- | ---------------------------------------------- | -------- |
-| `GROQ_API_KEY`  | API key for the Groq API (Llama 3.3 70B)       | Yes      |
+| `GROQ_API_KEY`  | API key for the Groq API (GPT-OSS 120B)  | Yes      |
 
 ## How It Works
 
@@ -158,7 +158,7 @@ extensively throughout development, including:
 ### AI Feedback Engine
 
 The AI feedback system is powered by the **Groq API** using the
-**`llama-3.3-70b-versatile`** model (Meta's Llama 3.3 70B). When a student
+**`openai/gpt-oss-120b`** model (OpenAI's flagship open-weight 120B model). When a student
 finishes their recording, the transcribed speech is sent to a Next.js API route
 (`/api/feedback`), which forwards it to Groq with a system prompt
 instructing the model to act as an experienced IELTS Speaking examiner.
