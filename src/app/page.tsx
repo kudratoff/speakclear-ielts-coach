@@ -7,11 +7,12 @@ import { topics } from "@/lib/topics";
 
 export default function HomePage() {
   const router = useRouter();
-  const { setTopic } = usePractice();
+  const { resetAll, setTopic } = usePractice();
   const [customTopic, setCustomTopic] = useState("");
   const [customError, setCustomError] = useState("");
 
   const startPractice = (topic: string) => {
+    resetAll();
     setTopic(topic);
     router.push("/practice");
   };
