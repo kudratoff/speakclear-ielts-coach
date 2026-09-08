@@ -55,6 +55,7 @@ For "missing_points": list things a strong answer on this topic would typically 
  * Returns: the Feedback JSON object (see src/lib/types.ts)
  */
 export async function POST(request: NextRequest) {
+  let timeoutId: NodeJS.Timeout | undefined;
   try {
     // ── Guard: API key must be present ──────────────────────────────
     if (!GROQ_API_KEY) {
@@ -84,7 +85,7 @@ export async function POST(request: NextRequest) {
 
     // ── Call the Groq API ───────────────────────────────────────────
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 25_000);
+    timeoutId = setTimeout(() => controller.abort(), 25000);
 
     const groqResponse = await fetch(GROQ_API_URL, {
       method: "POST",
@@ -166,15 +167,26 @@ export async function POST(request: NextRequest) {
     // ── Return the validated feedback ───────────────────────────────
     return NextResponse.json(feedback);
   } catch (error: any) {
+    // Always clear the timeout to prevent leaks on error
+    if (timeoutId) clearTimeout(timeoutId);
+
     // AbortError from our timeout
     if (error?.name === "AbortError") {
+      console.error("[api/feedback] Request aborted (timeout)");
       return NextResponse.json(
         { error: "AI model timed out. Please try again." },
         { status: 504 }
       );
     }
 
-    console.error("[api/feedback] Unexpected error:", error);
+    // Log full error details for debugging
+    console.error("[api/feedback] Unexpected error:", {
+      message: error?.message,
+      code: error?.code,
+      stack: error?.stack,
+      cause: error?.cause,
+    });
+
     return NextResponse.json(
       { error: "Internal server error." },
       { status: 500 }
