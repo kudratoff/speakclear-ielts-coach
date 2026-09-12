@@ -9,7 +9,9 @@ IELTS 9-band scale.
 
 ## Features
 
-- **8 realistic IELTS Speaking Part 2 cue cards** — plus a custom topic input
+- **55+ realistic IELTS Speaking Part 2 cue cards** in 11 browsable categories
+  (Family, Education, Work, Travel, Technology, Hobbies, Health, Environment,
+  Culture, Memories, Shopping) — plus a custom topic input
 - **Live transcription** via the browser's built-in Web Speech API (free, no API key)
 - **2-minute timer** mimicking the real IELTS Part 2 time limit
 - **AI-powered feedback** via Groq GPT-OSS 120B, scored on the IELTS 9-band scale
@@ -28,6 +30,7 @@ IELTS 9-band scale.
 | AI Feedback     | Groq API (`openai/gpt-oss-120b`)        |
 | Deployment      | Vercel (recommended)                    |
 | State Mgmt      | React Context (client-side only)        |
+| Icons           | lucide-react (lightweight, tree-shakeable) |
 
 ## Browser Support
 
@@ -81,7 +84,8 @@ The app displays a clear warning if the browser is not supported.
 
 ## How It Works
 
-1. **Choose a topic** — Pick a preset IELTS Speaking cue card or type your own.
+1. **Choose a topic** — Browse a category and pick a preset IELTS Speaking cue
+   card, or type your own.
 2. **Start speaking** — Click "Start Speaking" and talk for up to 2 minutes.
 3. **Live transcription** — Your speech is transcribed in real-time via the
    Web Speech API.
@@ -111,8 +115,9 @@ speakclear-ielts-coach/
 │   │   └── ScoreCard.tsx            # Band-score card
 │   ├── context/
 │   │   └── PracticeContext.tsx      # State mgmt (topic, transcript, feedback)
+│   ├── data/
+│   │   └── topics.ts                # 55+ cue card topics in 11 categories (easy to expand)
 │   └── lib/
-│       ├── topics.ts                # 8 preset IELTS Part 2 cue card topics
 │       └── types.ts                 # TypeScript interfaces
 ├── .env.example                     # Environment variable template
 ├── .gitignore
