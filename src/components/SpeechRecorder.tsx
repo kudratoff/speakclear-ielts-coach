@@ -247,12 +247,20 @@ export default function SpeechRecorder() {
             </button>
           )}
           {timeUp && !transcript.trim() && (
-            <button
-              disabled
-              className="px-6 py-3 bg-slate-300 text-slate-500 rounded-xl font-medium cursor-not-allowed"
-            >
-              Time&#39;s up — no speech detected
-            </button>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                disabled
+                className="px-6 py-3 bg-slate-300 text-slate-500 rounded-xl font-medium cursor-not-allowed"
+              >
+                Time&#39;s up — no speech detected
+              </button>
+              <button
+                onClick={startRecording}
+                className="px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-hover transition-colors"
+              >
+                Try recording again
+              </button>
+            </div>
           )}
           {!isRecording && !timeUp && (
             <button
