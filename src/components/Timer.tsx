@@ -8,10 +8,19 @@ interface TimerProps {
   onComplete?: () => void;
 }
 
+const RADIUS = 54;
+const STROKE_WIDTH = 8;
+const SIZE = 128;
+const CENTER = SIZE / 2;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
 /**
- * A clean MM:SS countdown timer with a progress bar.
- * - Green  (60s+)  → Amber (30s)  → Red (10s)
+ * Circular countdown ring for the IELTS Part 2 two-minute monologue.
+ *
+ * - Ring depletes clockwise as time passes (smooth linear animation).
+ * - Colour shifts: blue → amber at 30s → red at 10s, pulsing in the final 10s.
  * - Calls onComplete exactly once when the clock hits zero.
+ * - When idle it shows the full 2:00 allowance in muted grey.
  */
 export default function Timer({
   isActive,
@@ -61,29 +70,83 @@ export default function Timer({
   const seconds = secondsLeft % 60;
   const timeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
 
-  // Text colour transitions with low time
-  const textColor =
-    secondsLeft <= 10
-      ? "text-red-500"
-      : secondsLeft <= 30
-      ? "text-amber-500"
-      : "text-slate-700";
+  const urgent = isActive && secondsLeft <= 10;
+  const warning = isActive && secondsLeft <= 30;
+  const finished = !isActive && secondsLeft === 0;
 
-  // Progress bar colour mirrors the text
-  const progressColor =
-    secondsLeft <= 10 ? "#ef4444" : secondsLeft <= 30 ? "#f59e0b" : "#2563eb";
-  const progress = (secondsLeft / duration) * 100;
+  const ringColor = !isActive
+    ? finished
+      ? "#ef4444" // time's up
+      : "#cbd5e1" // idle slate
+    : urgent
+    ? "#ef4444"
+    : warning
+    ? "#f59e0b"
+    : "#2563eb";
+
+  const textColor = finished
+    ? "text-red-500"
+    : !isActive
+    ? "text-slate-400"
+    : urgent
+    ? "text-red-500"
+    : warning
+    ? "text-amber-500"
+    : "text-slate-700";
+
+  const caption = finished
+    ? "time's up"
+    : isActive
+    ? "remaining"
+    : "2 min";
+
+  const dashOffset = CIRCUMFERENCE * (secondsLeft / duration);
 
   return (
-    <div className="flex items-center gap-4">
-      <span className={`text-3xl font-mono font-bold ${textColor}`}>
-        {timeString}
-      </span>
-      <div className="w-40 h-2 bg-slate-200 rounded-full overflow-hidden">
-        <div
-          className="h-full rounded-full transition-all duration-1000"
-          style={{ width: `${progress}%`, backgroundColor: progressColor }}
+    <div
+      className="relative flex-shrink-0"
+      role="timer"
+      aria-label={`Time remaining: ${timeString}`}
+    >
+      <svg
+        width={SIZE}
+        height={SIZE}
+        viewBox={`0 0 ${SIZE} ${SIZE}`}
+        className={urgent ? "animate-pulse" : undefined}
+        aria-hidden="true"
+      >
+        {/* Track */}
+        <circle
+          cx={CENTER}
+          cy={CENTER}
+          r={RADIUS}
+          fill="none"
+          stroke="#e2e8f0"
+          strokeWidth={STROKE_WIDTH}
         />
+        {/* Progress ring */}
+        <circle
+          cx={CENTER}
+          cy={CENTER}
+          r={RADIUS}
+          fill="none"
+          stroke={ringColor}
+          strokeWidth={STROKE_WIDTH}
+          strokeLinecap="round"
+          strokeDasharray={CIRCUMFERENCE}
+          strokeDashoffset={dashOffset}
+          transform={`rotate(-90 ${CENTER} ${CENTER})`}
+          className="transition-all duration-1000 ease-linear"
+        />
+      </svg>
+      {/* Centered time readout */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className={`text-2xl font-mono font-bold tabular-nums ${textColor}`}>
+          {timeString}
+        </span>
+        <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 mt-0.5">
+          {caption}
+        </span>
       </div>
     </div>
   );
