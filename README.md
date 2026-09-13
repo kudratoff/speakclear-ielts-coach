@@ -104,14 +104,17 @@ speakclear-ielts-coach/
 │   │   ├── api/feedback/route.ts    # Groq API route (server-side, never exposes key)
 │   │   ├── globals.css              # Tailwind directives + global styles
 │   │   ├── layout.tsx               # Root layout + Context provider
-│   │   ├── page.tsx                 # Home — topic selection
+│   │   ├── page.tsx                 # Home — category selection
 │   │   ├── practice/
 │   │   │   └── page.tsx             # Practice — recording + timer
-│   │   └── results/
-│   │       └── page.tsx             # Results — feedback display
+│   │   ├── results/
+│   │   │   └── page.tsx             # Results — feedback display
+│   │   └── topics/
+│   │       └── [id]/page.tsx        # Category page — cue card list
 │   ├── components/
-│   │   ├── Timer.tsx                # 2-minute countdown with progress bar
+│   │   ├── Timer.tsx                # Circular 2-minute countdown ring
 │   │   ├── SpeechRecorder.tsx       # Web Speech API recorder
+│   │   ├── CategoryIcon.tsx         # Shared category icon map
 │   │   └── ScoreCard.tsx            # Band-score card
 │   ├── context/
 │   │   └── PracticeContext.tsx      # State mgmt (topic, transcript, feedback)
