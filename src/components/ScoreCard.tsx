@@ -19,10 +19,10 @@ export default function ScoreCard({
 }: ScoreCardProps) {
   return (
     <div
-      className={`rounded-2xl p-6 border text-center transition-all duration-200 ${
+      className={`rounded-2xl p-6 text-center transition-all duration-200 ${
         isOverall
-          ? "bg-primary/5 border-primary/30"
-          : "bg-white border-slate-200 hover:shadow-lg"
+          ? "bg-primary/5 ring-1 ring-primary/20 shadow-card"
+          : "bg-white shadow-card hover:shadow-card-hover hover:-translate-y-[3px]"
       }`}
     >
       <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">

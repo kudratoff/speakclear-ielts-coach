@@ -220,20 +220,20 @@ export default function SpeechRecorder() {
   return (
     <div className="space-y-6">
       {/* Topic display */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200">
+      <div className="bg-white rounded-2xl p-6 shadow-card">
         <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Your topic</h2>
         <p className="text-xl text-slate-900 font-medium leading-relaxed">{topic}</p>
       </div>
 
       {/* Timer & Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-2xl p-6 border border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-2xl p-6 shadow-card">
         <Timer isActive={isRecording} onComplete={handleTimeUp} />
 
         <div className="flex gap-3">
           {isRecording && (
             <button
               onClick={handleFinish}
-              className="px-6 py-3 bg-slate-800 text-white rounded-xl font-medium hover:bg-slate-700 transition-colors"
+              className="px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-sm hover:bg-primary-hover transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
             >
               Finish &amp; Get Feedback
             </button>
@@ -241,7 +241,7 @@ export default function SpeechRecorder() {
           {timeUp && transcript.trim() && (
             <button
               onClick={handleFinish}
-              className="px-6 py-3 bg-slate-800 text-white rounded-xl font-medium hover:bg-slate-700 transition-colors"
+              className="px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-sm hover:bg-primary-hover transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
             >
               Finish &amp; Get Feedback
             </button>
@@ -286,7 +286,7 @@ export default function SpeechRecorder() {
       )}
 
       {/* Live transcript */}
-      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-card overflow-hidden">
         <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
           <h3 className="font-semibold text-slate-900">Your answer</h3>
           <span className="text-sm text-slate-500">

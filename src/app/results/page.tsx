@@ -91,7 +91,7 @@ export default function ResultsPage() {
           return (
             <div
               key={section.title}
-              className="bg-white rounded-2xl p-6 border border-slate-200 mb-6"
+              className="bg-white rounded-2xl p-6 shadow-card mb-6"
             >
               <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                 <span className={section.color}>{section.icon}</span>

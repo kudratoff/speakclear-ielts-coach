@@ -82,7 +82,7 @@ export default function Timer({
     ? "#ef4444"
     : warning
     ? "#f59e0b"
-    : "#2563eb";
+    : "#1E3A8A"; // primary navy
 
   const textColor = finished
     ? "text-red-500"

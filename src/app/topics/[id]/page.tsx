@@ -44,7 +44,7 @@ export default function CategoryTopicsPage() {
         </button>
 
         {/* Category header */}
-        <header className="bg-white rounded-2xl border border-slate-200 p-6 mb-8 flex items-start gap-4">
+        <header className="bg-white rounded-2xl shadow-card p-6 mb-8 flex items-start gap-4">
           <span className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
             <CategoryIcon id={category.id} className="w-6 h-6" />
           </span>
@@ -63,7 +63,7 @@ export default function CategoryTopicsPage() {
         <h2 className="text-lg font-semibold text-slate-900 mb-4">
           Pick a cue card
         </h2>
-        <section className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+        <section className="bg-white rounded-2xl shadow-card overflow-hidden">
           <ul className="divide-y divide-slate-100">
             {category.topics.map((topic, index) => (
               <li key={topic}>
