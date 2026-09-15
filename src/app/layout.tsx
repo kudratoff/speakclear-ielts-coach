@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { PracticeProvider } from "@/context/PracticeContext";
 import "./globals.css";
 
-// Inter — primary sans-serif for body text and UI
+// Inter — body text, cards, labels, and UI (weights 400/500/600)
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-inter",
   display: "swap",
 });
 
-// Merriweather — serif used for the "Speak" part of the logo
-const merriweather = Merriweather({
+// Playfair Display — editorial serif for the wordmark and headings (500/600, + italic)
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
-  variable: "--font-merriweather",
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
   display: "swap",
 });
 
@@ -32,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${merriweather.variable} bg-slate-50 text-slate-900 font-sans antialiased`}
+        className={`${inter.variable} ${playfair.variable} bg-cream text-ink font-sans antialiased`}
       >
         <PracticeProvider>{children}</PracticeProvider>
       </body>

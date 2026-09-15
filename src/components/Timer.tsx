@@ -76,23 +76,23 @@ export default function Timer({
 
   const ringColor = !isActive
     ? finished
-      ? "#ef4444" // time's up
-      : "#cbd5e1" // idle slate
+      ? "#C85A32" // time's up (terracotta)
+      : "#D6D0C5" // idle warm line
     : urgent
     ? "#ef4444"
     : warning
     ? "#f59e0b"
-    : "#1E3A8A"; // primary navy
+    : "#C85A32"; // accent terracotta
 
   const textColor = finished
-    ? "text-red-500"
+    ? "text-accent"
     : !isActive
-    ? "text-slate-400"
+    ? "text-quiet"
     : urgent
     ? "text-red-500"
     : warning
     ? "text-amber-500"
-    : "text-slate-700";
+    : "text-ink";
 
   const caption = finished
     ? "time's up"
@@ -121,7 +121,7 @@ export default function Timer({
           cy={CENTER}
           r={RADIUS}
           fill="none"
-          stroke="#e2e8f0"
+          stroke="#E5E1D8"
           strokeWidth={STROKE_WIDTH}
         />
         {/* Progress ring */}
@@ -141,10 +141,10 @@ export default function Timer({
       </svg>
       {/* Centered time readout */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className={`text-2xl font-mono font-bold tabular-nums ${textColor}`}>
+        <span className={`text-2xl font-sans font-medium tabular-nums ${textColor}`}>
           {timeString}
         </span>
-        <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 mt-0.5">
+        <span className="text-[10px] font-medium uppercase tracking-wider text-quiet mt-0.5">
           {caption}
         </span>
       </div>

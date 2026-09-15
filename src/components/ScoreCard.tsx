@@ -9,7 +9,7 @@ interface ScoreCardProps {
 
 /**
  * A clean band-score card used on the results page.
- * The overall estimate gets a subtle indigo tint to make it stand out.
+ * The overall estimate gets a subtle terracotta tint to make it stand out.
  */
 export default function ScoreCard({
   label,
@@ -21,21 +21,21 @@ export default function ScoreCard({
     <div
       className={`rounded-2xl p-6 text-center transition-all duration-200 ${
         isOverall
-          ? "bg-primary/5 ring-1 ring-primary/20 shadow-card"
-          : "bg-white shadow-card hover:shadow-card-hover hover:-translate-y-[3px]"
+          ? "bg-parchment ring-1 ring-accent/30"
+          : "bg-white border border-line hover:border-line-strong hover:shadow-card"
       }`}
     >
-      <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+      <div className="text-xs font-semibold text-warmgray uppercase tracking-wider mb-3">
         {label}
       </div>
       <div
-        className={`text-5xl font-bold mb-3 ${
-          isOverall ? "text-primary" : "text-slate-900"
+        className={`text-5xl font-semibold mb-3 ${
+          isOverall ? "text-accent" : "text-ink"
         }`}
       >
         {score}
       </div>
-      <p className="text-sm text-slate-600 leading-relaxed">{comment}</p>
+      <p className="text-sm text-muted leading-relaxed">{comment}</p>
     </div>
   );
 }

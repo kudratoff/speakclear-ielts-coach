@@ -21,7 +21,7 @@ export default function PracticePage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4">
+    <main className="min-h-screen bg-cream py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <SpeechRecorder />
       </div>

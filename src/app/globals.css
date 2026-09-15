@@ -11,14 +11,14 @@
   }
 
   ::selection {
-    background-color: rgba(30, 58, 138, 0.12);
+    background-color: rgba(200, 90, 50, 0.15);
   }
 }
 
-/* Custom scrollbar for transcript area */
+/* Custom scrollbar for transcript area (warm tones) */
 .transcript-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 #f1f5f9;
+  scrollbar-color: #d6d0c5 #f1ede5;
 }
 
 .transcript-scroll::-webkit-scrollbar {
@@ -26,10 +26,10 @@
 }
 
 .transcript-scroll::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f1ede5;
 }
 
 .transcript-scroll::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d6d0c5;
   border-radius: 3px;
 }

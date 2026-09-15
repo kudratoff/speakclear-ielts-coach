@@ -31,31 +31,31 @@ export default function ResultsPage() {
       title: "Your Strengths",
       items: feedback.strengths || [],
       icon: "✓",
-      color: "text-green-600",
+      color: "text-warmgray",
     },
     {
       title: "Areas to Improve",
       items: feedback.weaknesses || [],
       icon: "⚠",
-      color: "text-amber-600",
+      color: "text-warmgray",
     },
     {
       title: "What a Strong Answer Would Cover",
       items: feedback.missing_points || [],
       icon: "ℹ",
-      color: "text-blue-600",
+      color: "text-warmgray",
     },
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4">
+    <main className="min-h-screen bg-cream py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">
+          <h1 className="text-4xl font-serif font-semibold text-ink mb-2">
             Your Feedback
           </h1>
-          <p className="text-slate-600">
+          <p className="text-muted">
             AI-powered evaluation of your spoken answer
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function ResultsPage() {
           return (
             <div
               key={section.title}
-              className="bg-white rounded-2xl p-6 shadow-card mb-6"
+              className="bg-white rounded-2xl border border-frame p-6 mb-6"
             >
               <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                 <span className={section.color}>{section.icon}</span>
@@ -112,11 +112,11 @@ export default function ResultsPage() {
         })}
 
         {/* One Actionable Tip — highlighted at the bottom */}
-        <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 mt-8">
-          <h3 className="font-semibold text-primary mb-2 flex items-center gap-2">
+        <div className="bg-parchment border border-accent/25 rounded-2xl p-6 mt-8">
+          <h3 className="font-serif font-semibold text-accent mb-2 flex items-center gap-2">
             💡 One Actionable Tip
           </h3>
-          <p className="text-slate-800 leading-relaxed">
+          <p className="text-ink leading-relaxed">
             {feedback.one_actionable_tip}
           </p>
         </div>
@@ -125,7 +125,7 @@ export default function ResultsPage() {
         <div className="text-center mt-12">
           <button
             onClick={handleTryAnother}
-            className="px-8 py-4 bg-primary text-white rounded-xl font-medium hover:bg-primary-hover transition-colors text-lg"
+            className="px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition-all duration-200 text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
           >
             Try Another Topic
           </button>

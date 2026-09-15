@@ -32,49 +32,49 @@ export default function CategoryTopicsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4">
+    <main className="min-h-screen bg-cream py-12 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Back link */}
         <button
           onClick={() => router.push("/")}
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-ink transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded"
         >
           <ArrowLeft className="w-4 h-4" />
           All categories
         </button>
 
         {/* Category header */}
-        <header className="bg-white rounded-2xl shadow-card p-6 mb-8 flex items-start gap-4">
-          <span className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+        <header className="bg-white border border-frame rounded-2xl p-6 mb-10 flex items-start gap-4">
+          <span className="flex-shrink-0 w-12 h-12 bg-sand rounded-xl flex items-center justify-center text-warmgray">
             <CategoryIcon id={category.id} className="w-6 h-6" />
           </span>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">
+            <h1 className="text-3xl font-serif font-semibold text-ink">
               {category.label}
             </h1>
-            <p className="text-slate-500 mt-1">{category.description}</p>
-            <p className="text-xs text-slate-400 mt-2">
+            <p className="text-muted mt-1">{category.description}</p>
+            <p className="text-xs text-quiet mt-2">
               {category.topics.length} cue cards · IELTS Speaking Part 2
             </p>
           </div>
         </header>
 
         {/* Cue card list */}
-        <h2 className="text-lg font-semibold text-slate-900 mb-4">
+        <h2 className="text-2xl font-serif font-semibold text-ink mb-4">
           Pick a cue card
         </h2>
-        <section className="bg-white rounded-2xl shadow-card overflow-hidden">
-          <ul className="divide-y divide-slate-100">
+        <section className="bg-white border border-line rounded-2xl overflow-hidden">
+          <ul className="divide-y divide-line">
             {category.topics.map((topic, index) => (
               <li key={topic}>
                 <button
                   onClick={() => startPractice(topic)}
-                  className="w-full flex items-center gap-4 px-6 py-4 text-left hover:bg-slate-50 group transition-colors"
+                  className="w-full flex items-center gap-4 px-6 py-4 text-left hover:bg-paper group transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent/40"
                 >
-                  <span className="flex-shrink-0 w-7 h-7 bg-slate-100 group-hover:bg-primary/10 rounded-lg flex items-center justify-center text-xs font-semibold text-slate-500 group-hover:text-primary transition-colors">
+                  <span className="flex-shrink-0 w-7 h-7 bg-sand rounded-lg flex items-center justify-center text-xs font-medium text-warmgray group-hover:text-accent transition-colors">
                     {index + 1}
                   </span>
-                  <span className="flex-1 text-slate-800 font-medium group-hover:text-primary transition-colors">
+                  <span className="flex-1 text-ink font-medium group-hover:text-accent transition-colors">
                     {topic}
                   </span>
                 </button>
@@ -83,7 +83,7 @@ export default function CategoryTopicsPage() {
           </ul>
         </section>
 
-        <p className="text-center text-sm text-slate-400 mt-8">
+        <p className="text-center text-sm text-quiet mt-8">
           You&apos;ll have up to 2 minutes to speak your answer, then get
           instant AI feedback.
         </p>

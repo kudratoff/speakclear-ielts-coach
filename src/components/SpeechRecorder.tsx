@@ -210,8 +210,8 @@ export default function SpeechRecorder() {
     return (
       <div className="flex flex-col items-center justify-center py-16">
         <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mb-4"></div>
-        <p className="text-slate-600">Analyzing your spoken answer...</p>
-        <p className="text-sm text-slate-500 mt-2">This may take up to 10 seconds</p>
+        <p className="text-muted">Analyzing your spoken answer...</p>
+        <p className="text-sm text-quiet mt-2">This may take up to 10 seconds</p>
       </div>
     );
   }
@@ -220,20 +220,20 @@ export default function SpeechRecorder() {
   return (
     <div className="space-y-6">
       {/* Topic display */}
-      <div className="bg-white rounded-2xl p-6 shadow-card">
-        <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Your topic</h2>
-        <p className="text-xl text-slate-900 font-medium leading-relaxed">{topic}</p>
+      <div className="bg-white rounded-2xl border border-frame p-6">
+        <h2 className="font-serif font-semibold text-ink text-sm uppercase tracking-wider mb-2">Your topic</h2>
+        <p className="text-xl text-ink font-medium leading-relaxed">{topic}</p>
       </div>
 
       {/* Timer & Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-2xl p-6 shadow-card">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-2xl border border-frame p-6">
         <Timer isActive={isRecording} onComplete={handleTimeUp} />
 
         <div className="flex gap-3">
           {isRecording && (
             <button
               onClick={handleFinish}
-              className="px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-sm hover:bg-primary-hover transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+              className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               Finish &amp; Get Feedback
             </button>
@@ -241,7 +241,7 @@ export default function SpeechRecorder() {
           {timeUp && transcript.trim() && (
             <button
               onClick={handleFinish}
-              className="px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-sm hover:bg-primary-hover transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+              className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               Finish &amp; Get Feedback
             </button>
@@ -250,13 +250,13 @@ export default function SpeechRecorder() {
             <div className="flex flex-wrap items-center gap-3">
               <button
                 disabled
-                className="px-6 py-3 bg-slate-300 text-slate-500 rounded-xl font-medium cursor-not-allowed"
+                className="px-6 py-3 bg-sand text-muted rounded-lg font-medium cursor-not-allowed"
               >
                 Time&#39;s up — no speech detected
               </button>
               <button
                 onClick={startRecording}
-                className="px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-hover transition-colors"
+                className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition-colors"
               >
                 Try recording again
               </button>
@@ -265,7 +265,7 @@ export default function SpeechRecorder() {
           {!isRecording && !timeUp && (
             <button
               onClick={startRecording}
-              className="px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-hover transition-colors flex items-center gap-2"
+              className="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               <span className="w-3 h-3 bg-white rounded-full animate-pulse"></span>
               Start Speaking
@@ -286,23 +286,23 @@ export default function SpeechRecorder() {
       )}
 
       {/* Live transcript */}
-      <div className="bg-white rounded-2xl shadow-card overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-          <h3 className="font-semibold text-slate-900">Your answer</h3>
-          <span className="text-sm text-slate-500">
+      <div className="bg-white rounded-2xl border border-frame overflow-hidden">
+        <div className="px-6 py-4 border-b border-line flex items-center justify-between">
+          <h3 className="font-serif font-semibold text-ink">Your answer</h3>
+          <span className="text-sm text-muted">
             {isRecording ? "Listening…" : transcript ? "Done" : "Not started"}
           </span>
         </div>
         <div className="p-6 min-h-[180px] transcript-scroll overflow-y-auto">
           {transcript ? (
-            <p className="text-slate-900 whitespace-pre-wrap leading-relaxed text-lg">
+            <p className="text-ink whitespace-pre-wrap leading-relaxed text-lg">
               {transcript}
               {interimTranscript && isRecording && (
-                <span className="text-slate-400"> {interimTranscript}</span>
+                <span className="text-quiet"> {interimTranscript}</span>
               )}
             </p>
           ) : (
-            <span className="text-slate-400">Your transcript will appear here as you speak…</span>
+            <span className="text-quiet">Your transcript will appear here as you speak…</span>
           )}
         </div>
       </div>

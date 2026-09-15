@@ -31,25 +31,25 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 py-12 px-4">
+    <main className="min-h-screen bg-cream py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Hero */}
-        <header className="text-center rounded-3xl bg-gradient-to-b from-slate-100 via-slate-100/60 to-transparent py-12 mb-12">
-          <h1 className="text-5xl text-primary mb-3">
-            <span className="font-serif font-black tracking-tight">Speak</span>
-            <span className="font-sans font-light">Clear</span>
+        {/* Hero — editorial wordmark */}
+        <header className="text-center pb-12 mb-14 border-b border-frame">
+          <h1 className="text-6xl text-ink mb-4">
+            <span className="font-serif italic font-medium">Speak</span>
+            <span className="font-sans font-medium">Clear</span>
           </h1>
-          <p className="text-slate-500 text-lg font-light tracking-wide">
+          <p className="text-sm text-muted tracking-wide">
             IELTS Speaking Practice Coach
           </p>
         </header>
 
         {/* Instructions */}
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-semibold text-slate-900 mb-3">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-serif font-semibold text-ink mb-3">
             Choose a practice topic
           </h2>
-          <p className="text-slate-500 max-w-2xl mx-auto">
+          <p className="text-muted max-w-2xl mx-auto leading-relaxed">
             Pick a category to browse its IELTS Speaking cue cards, or type
             your own topic below. You&apos;ll have up to 2 minutes to speak,
             then get instant AI feedback.
@@ -57,39 +57,39 @@ export default function HomePage() {
         </div>
 
         {/* Category grid — click to open the category page */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-14">
           {topicCategories.map((category) => (
             <button
               key={category.id}
               onClick={() => router.push(`/topics/${category.id}`)}
-              className="text-left rounded-xl bg-white p-5 shadow-card hover:shadow-card-hover hover:-translate-y-[3px] transition-all duration-200 ease-in-out group focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+              className="text-left rounded-xl bg-white border border-line p-5 transition-all duration-200 ease-in-out hover:border-line-strong hover:shadow-card group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
-              <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary mb-3">
+              <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-sand text-warmgray mb-3">
                 <CategoryIcon id={category.id} className="w-5 h-5" />
               </span>
-              <span className="block text-xs font-semibold leading-snug text-slate-900 group-hover:text-primary transition-colors duration-200">
+              <span className="block text-sm font-medium leading-snug text-ink">
                 {category.label}
               </span>
               <span className="flex items-center justify-between mt-1.5">
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-quiet">
                   {category.topics.length} topics
                 </span>
-                <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200" />
+                <ChevronRight className="w-3.5 h-3.5 text-quiet group-hover:text-accent group-hover:translate-x-0.5 transition-all duration-200" />
               </span>
             </button>
           ))}
         </div>
 
         {/* Custom topic (unchanged) */}
-        <div className="border-t border-slate-200 pt-10">
-          <h3 className="text-xl font-semibold text-slate-900 mb-4">
+        <div className="border-t border-frame pt-12">
+          <h3 className="text-2xl font-serif font-semibold text-ink mb-4">
             Or type your own topic
           </h3>
           <form onSubmit={handleCustomSubmit} className="space-y-3">
             <div>
               <label
                 htmlFor="custom-topic"
-                className="block text-sm font-medium text-slate-700 mb-1"
+                className="block text-sm font-medium text-muted mb-1"
               >
                 Custom IELTS Speaking cue card
               </label>
@@ -99,10 +99,10 @@ export default function HomePage() {
                 value={customTopic}
                 onChange={(e) => setCustomTopic(e.target.value)}
                 placeholder="Describe a place you visited that impressed you"
-                className={`w-full px-4 py-3 bg-white border-2 rounded-xl text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-primary focus:ring-4 focus:ring-primary/10 ${
+                className={`w-full px-4 py-3 bg-parchment border rounded-lg text-ink placeholder:text-quiet outline-none transition-all duration-200 focus:border-accent focus:ring-4 focus:ring-accent/10 ${
                   customError
                     ? "border-red-300 focus:border-red-400 focus:ring-red-500/10"
-                    : "border-slate-200"
+                    : "border-dust"
                 }`}
               />
               {customError && (
@@ -112,7 +112,7 @@ export default function HomePage() {
             <button
               type="submit"
               disabled={!customTopic.trim()}
-              className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-sm hover:bg-primary-hover hover:shadow-md disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-sm transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+              className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary-hover disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               Start practicing
             </button>
