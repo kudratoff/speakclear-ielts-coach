@@ -5,7 +5,7 @@ import { useState } from "react";
 import { usePractice } from "@/context/PracticeContext";
 import { topicCategories } from "@/data/topics";
 import CategoryIcon from "@/components/CategoryIcon";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, History } from "lucide-react";
 
 export default function HomePage() {
   const router = useRouter();
@@ -42,6 +42,15 @@ export default function HomePage() {
           <p className="text-sm text-muted tracking-wide">
             IELTS Speaking Practice Coach
           </p>
+          <a
+            href="/history"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-white border border-dust rounded-lg text-sm font-medium text-ink hover:border-line-strong hover:shadow-card transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+          >
+            <History className="w-4 h-4 text-accent" />
+            View Past Attempts
+          </a>
         </header>
 
         {/* Instructions */}

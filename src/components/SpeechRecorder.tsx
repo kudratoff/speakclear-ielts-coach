@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { usePractice } from "@/context/PracticeContext";
 import Timer from "@/components/Timer";
+import { saveAttempt } from "@/lib/history";
 
 /**
  * Minimal type for the browser's (webkit) SpeechRecognition API.
@@ -166,6 +167,11 @@ export default function SpeechRecorder() {
 
         const feedbackData = await response.json();
         setFeedback(feedbackData);
+
+        // Persist this attempt (topic + transcript + feedback) to localStorage
+        // so the /history page can display past sessions.
+        saveAttempt(topic, finalTranscript, feedbackData);
+
         router.push("/results");
       } catch (err) {
         setError(

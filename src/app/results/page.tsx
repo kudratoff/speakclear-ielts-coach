@@ -60,8 +60,8 @@ export default function ResultsPage() {
           </p>
         </div>
 
-        {/* Score Cards — 4 per row on desktop, 2 on tablet, 1 on mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Score Cards — 5 per row on desktop, 2 on tablet, 1 on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
           <ScoreCard
             label="Fluency &amp; Coherence"
             score={feedback.fluency_coherence.score}
@@ -78,12 +78,57 @@ export default function ResultsPage() {
             comment={feedback.grammatical_range.comment}
           />
           <ScoreCard
+            label="Pronunciation"
+            score={feedback.pronunciation.score}
+            comment={feedback.pronunciation.comment}
+          />
+          <ScoreCard
             label="Overall Band"
             score={feedback.overall_band_estimate}
-            comment="Estimated IELTS Speaking band"
+            comment="Average of the four criteria"
             isOverall
           />
         </div>
+
+        {/* Actionable Upgrades — quoted sentences + higher-band alternatives */}
+        {feedback.actionable_upgrades && feedback.actionable_upgrades.length > 0 && (
+          <div className="bg-white rounded-2xl border border-frame p-6 mb-6">
+            <h3 className="font-serif font-semibold text-ink mb-5 flex items-center gap-2">
+              <span className="text-accent">⚡</span>
+              Actionable Upgrades
+            </h3>
+            <ul className="space-y-6">
+              {feedback.actionable_upgrades.map((upgrade, i) => (
+                <li
+                  key={i}
+                  className="pl-5 border-l-2 border-accent/30 space-y-2"
+                >
+                  <p className="font-serif italic text-ink text-lg leading-relaxed">
+                    &ldquo;{upgrade.original}&rdquo;
+                  </p>
+                  {upgrade.issue && (
+                    <p className="text-sm text-muted leading-relaxed">
+                      {upgrade.issue}
+                    </p>
+                  )}
+                  <ul className="space-y-1.5 pt-1">
+                    {upgrade.alternatives.map((alt, j) => (
+                      <li
+                        key={j}
+                        className="flex gap-2.5 text-ink leading-relaxed"
+                      >
+                        <span className="text-accent font-semibold select-none">
+                          →
+                        </span>
+                        <span>{alt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Strengths / Weaknesses / Missing Points */}
         {sections.map((section) => {
