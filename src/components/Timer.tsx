@@ -98,7 +98,7 @@ export default function Timer({
     ? "time's up"
     : isActive
     ? "remaining"
-    : "2 min";
+    : "";
 
   const dashOffset = CIRCUMFERENCE * (secondsLeft / duration);
 
@@ -144,9 +144,11 @@ export default function Timer({
         <span className={`text-2xl font-sans font-medium tabular-nums ${textColor}`}>
           {timeString}
         </span>
-        <span className="text-[10px] font-medium uppercase tracking-wider text-quiet mt-0.5">
-          {caption}
-        </span>
+        {caption && (
+          <span className="text-[10px] font-medium uppercase tracking-wider text-quiet mt-0.5">
+            {caption}
+          </span>
+        )}
       </div>
     </div>
   );
