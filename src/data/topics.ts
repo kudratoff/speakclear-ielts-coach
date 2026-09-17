@@ -32,6 +32,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe an older person you admire",
       "Describe a person who has influenced your life",
       "Describe a family celebration that was special to you",
+      "Describe a family member you admire",
     ],
   },
   {
@@ -44,6 +45,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe a skill you would like to learn",
       "Describe a course or class you found useful",
       "Describe an important decision you made about your studies",
+      "Describe a teacher who influenced you",
     ],
   },
   {
@@ -81,6 +83,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe a website you visit often",
       "Describe a film or TV programme you enjoyed",
       "Describe a time you used technology to help someone",
+      "Describe a piece of technology you find useful",
     ],
   },
   {
@@ -94,6 +97,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe something you do to relax",
       "Describe a musical instrument you would like to learn",
       "Describe a weekend activity you enjoy",
+      "Describe an outdoor activity you enjoy",
     ],
   },
   {
@@ -118,6 +122,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe a walk you took in a natural place",
       "Describe a way people can protect the environment",
       "Describe a natural place you would like to visit",
+      "Describe an environmental problem in your country",
     ],
   },
   {
@@ -130,6 +135,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe a historical building or site you have visited",
       "Describe a piece of art or music that means a lot to you",
       "Describe a dish that is typical of your country",
+      "Describe a traditional festival in your country",
     ],
   },
   {
@@ -142,6 +148,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe a time you helped someone",
       "Describe a time you overcame a difficult challenge",
       "Describe a memorable day you spent with family or friends",
+      "Describe a memorable trip you took",
     ],
   },
   {
@@ -154,6 +161,7 @@ export const topicCategories: readonly TopicCategory[] = [
       "Describe a time you saved money for something special",
       "Describe something expensive you would like to buy in the future",
       "Describe a present you gave to someone",
+      "Describe something you bought that you were happy with",
     ],
   },
 ];

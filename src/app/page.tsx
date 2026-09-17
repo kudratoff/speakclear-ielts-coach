@@ -36,8 +36,9 @@ export default function HomePage() {
       <div className="max-w-4xl mx-auto">
         {/* Hero — editorial wordmark */}
         <header className="text-center pb-12 mb-14 border-b border-frame">
-          <h1 className="text-6xl text-ink mb-4 font-serif font-medium">
-            SpeakClear
+          <h1 className="text-5xl text-ink mb-4 font-serif font-medium sm:text-6xl">
+            <span className="italic mr-2">Speak</span>
+            <span>Clear</span>
           </h1>
           <p className="text-sm text-muted tracking-wide">
             IELTS Speaking Practice Coach
